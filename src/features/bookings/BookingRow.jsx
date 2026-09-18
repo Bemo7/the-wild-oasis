@@ -34,8 +34,9 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
-  booking: {
+function BookingRow({ booking = {} }) {
+  // 1. Safely extract top-level properties with fallbacks
+  const {
     id: bookingId,
     created_at,
     startDate,
@@ -44,10 +45,12 @@ function BookingRow({
     numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}) {
+  } = booking;
+
+  // 2. Use ?? to handle both null and undefined for nested objects
+  const { fullName: guestName, email } = booking.guests ?? {};
+  const { name: cabinName } = booking.cabins ?? {};
+
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
