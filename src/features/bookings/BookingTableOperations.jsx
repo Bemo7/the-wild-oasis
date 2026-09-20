@@ -17,6 +17,8 @@ function BookingTableOperations() {
 
       <SortBy
         options={[
+          { value: "id-desc", label: "Recent (Descending)" },
+          { value: "id-asc", label: "Oldest (Ascending)" },
           { value: "startDate-desc", label: "Sort by date (recent first)" },
           { value: "startDate-asc", label: "Sort by date (earlier first)" },
           {

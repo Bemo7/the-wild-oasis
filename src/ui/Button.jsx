@@ -55,6 +55,10 @@ const Button = styled.button`
 
   ${(props) => variations[props.variation || "primary"]}
   ${(props) => sizes[props.size || "medium"]}
+
+  &:disabled {
+    opacity: 0.7;
+  }
 `;
 
 // Possibly phased out (deprecated)

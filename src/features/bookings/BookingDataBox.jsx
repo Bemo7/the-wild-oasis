@@ -115,8 +115,14 @@ function BookingDataBox({ booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
+    guests: {
+      fullName: guestName,
+      email,
+      country,
+      countryFlag,
+      nationalID,
+    } = {},
+    cabins: { name: cabinName } = {},
   } = booking;
 
   return (
@@ -130,11 +136,12 @@ function BookingDataBox({ booking }) {
         </div>
 
         <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
+          {startDate && format(new Date(startDate), "EEE, MMM dd yyyy")} (
+          {startDate &&
+            (isToday(new Date(startDate))
+              ? "Today"
+              : formatDistanceFromNow(startDate))}
+          ) &mdash; {startDate && format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
       </Header>
 
@@ -169,7 +176,7 @@ function BookingDataBox({ booking }) {
 
             {hasBreakfast &&
               ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
+                extrasPrice,
               )} breakfast)`}
           </DataItem>
 
@@ -178,7 +185,10 @@ function BookingDataBox({ booking }) {
       </Section>
 
       <Footer>
-        <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+        <p>
+          Booked{" "}
+          {created_at && format(new Date(created_at), "EEE, MMM dd yyyy, p")}
+        </p>
       </Footer>
     </StyledBookingDataBox>
   );
